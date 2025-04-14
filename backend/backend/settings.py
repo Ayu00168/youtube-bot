@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import Config, RepositoryEnv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+config = Config(repository=RepositoryEnv( '../.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -137,3 +140,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REDDIT_CLIENT_ID = config('REDDIT_SECRET_USER')
+REDDIT_CLIENT_SECRET = config('REDDIT_SECRET_USER_KEY')
+REDDIT_USERNAME = config('REDDIT_USERNAME')
+REDDIT_PASSWORD = config('REDDIT_PASSWORD')
+REDDIT_USER_AGENT = config('REDDIT_USER_AGENT')
