@@ -16,6 +16,8 @@ djangorestframework==3.16.0
 idna==3.10
 isodate==0.7.2
 kombu==5.5.2
+praw==7.8.1
+prawcore==2.4.0
 prompt_toolkit==3.0.50
 psycopg2-binary==2.9.10
 python-dateutil==2.9.0.post0
@@ -25,6 +27,9 @@ requests==2.32.3
 six==1.17.0
 sqlparse==0.5.3
 tzdata==2025.2
+update-checker==0.18.0
 urllib3==2.4.0
 vine==5.1.0
 wcwidth==0.2.13
+websocket-client==1.8.0
+yt-dlp==2025.3.31

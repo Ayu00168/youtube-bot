@@ -1,16 +1,7 @@
 import praw
 from backend.settings import REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD, REDDIT_USER_AGENT
 
-SUBREDDITS = [
-"memes",
-"funny",
-"wholesomememes",
-"aww",
-"gifs",
-"pics",
-"showerthoughts",
-"todayilearned",
-"science",]
+SUBREDDITS = ["onepiece", "luffy", "anime", "manga", "ShingekiNoKyojin", "AttackOnTitan", "Bleach", "Naruto", "MyHeroAcademia", "TokyoGhoul", "JujutsuKaisen"]
 
 reddit = praw.Reddit(
     client_id=REDDIT_CLIENT_ID,
@@ -25,18 +16,22 @@ def get_top_reddit_posts(limit=5):
 
     for sub in SUBREDDITS:
         subreddit = reddit.subreddit(sub)
-        print(f"Fetching from r/{sub}...")
 
         for post in subreddit.hot(limit=limit):
             if not post.stickied:
-                all_posts.append({
-                    "title": post.title,
-                    "url": post.url,
-                    "score": post.score,
-                    "subreddit": post.subreddit.display_name,
-                    "id": post.id,
-                    "permalink": f"https://reddit.com{post.permalink}"
-                })
+                if post.is_video:
+                    all_posts.append({
+                        "source": "reddit",
+                        "title": post.title,
+                        "url": post.url,
+                        "score": post.score,
+                        "subreddit": post.subreddit.display_name,
+                        "id": post.id,
+                        "permalink": f"https://reddit.com{post.permalink}",
+                        "comments":post.num_comments,
+                        "created": post.created_utc,
+                        "upvote_ratio": post.upvote_ratio,
+                    })
 
     return all_posts
 

@@ -7,7 +7,7 @@ from yt_dlp import YoutubeDL
 
 def isShortsVideo(item):
     for items in item.items:
-        print( f"https://www.youtube.com/watch?v={item.id}")
+        print( f"https://www.youtube.com/watch?v={items.id}")
 
 
 def get_youtube_trending_videos():
@@ -24,12 +24,7 @@ def get_youtube_trending_videos():
         response = ydl.extract_info(url, download=False)
         data_url = response["url"] 
         data = requests.get(data_url)
-        print(data.json())
-        # if response.status_code == 200:
-        #     for items in response.json().get('items', []):
-        #         duration = items['contentDetails']['duration']
-        #         if isShortsVideo(duration):
-        #             print(f"https://www.youtube.com/watch?v={items['id']}")
-
+        isShortsVideo(data.json())
+        
 if __name__ == "__main__":
     get_youtube_trending_videos()
